@@ -63,7 +63,7 @@ with DAG(
     t1 = BashOperator(bash_command="touch ~/meu_arquivo_01.txt", task_id="criar_arquivo")
 
     # Vamos definir a nossa segunda tarefa
-    t2 = BashOperator(bash_command="mv ~/meu_arquivo_01.txt ~/meu_arquivo_01_MUDOU.txt", task_id="mudar_nome_do_arquivo")    
+    t2 = BashOperator(bash_command="mv ~/meu_arquivo_01.txt /opt/airflow/files/meu_arquivo_01_MUDOU.txt", task_id="mudar_nome_do_arquivo")    
 
     # Configurar a tarefa T2 para ser dependente da tarefa T1
     t1 >> t2 
