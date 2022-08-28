@@ -1,12 +1,14 @@
 version: '3.8'
 services:
     postgres:
+        restart: always
         image: postgres
         environment:
             - POSTGRES_USER=airflow
             - POSTGRES_PASSWORD=airflow
             - POSTGRES_DB=airflow
     scheduler:
+        restart: always
         image: apache/airflow:2.3.4-python3.10
         command: scheduler
         # restart_policy:
@@ -18,6 +20,7 @@ services:
         volumes:
             - ./dags:/opt/airflow/dags
             - ./logs:/opt/airflow/logs
+            - ./files:/opt/airflow/files
     webserver:
         image: apache/airflow:2.3.4-python3.10
         entrypoint: ./scripts/entrypoint.sh
@@ -32,5 +35,6 @@ services:
             - ./dags:/opt/airflow/dags
             - ./logs:/opt/airflow/logs
             - ./scripts:/opt/airflow/scripts
+            - ./files:/opt/airflow/files
         ports:
             - "8080:8080"
